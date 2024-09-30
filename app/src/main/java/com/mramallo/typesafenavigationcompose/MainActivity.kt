@@ -8,8 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.mramallo.typesafenavigationcompose.ui.navigation.Detail
-import com.mramallo.typesafenavigationcompose.ui.navigation.Home
+import com.mramallo.typesafenavigationcompose.ui.navigation.DetailScreen
+import com.mramallo.typesafenavigationcompose.ui.navigation.HomeScreen
 import com.mramallo.typesafenavigationcompose.ui.screens.DetailScreen
 import com.mramallo.typesafenavigationcompose.ui.screens.HomeScreen
 import com.mramallo.typesafenavigationcompose.ui.theme.TypeSafeNavigationComposeTheme
@@ -23,29 +23,27 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = Home
+                    startDestination = HomeScreen
                 ) {
-                    composable<Home> {
+                    composable<HomeScreen> {
                         HomeScreen(
-                            onDetailClick = {
-                                navController.navigate(Detail)
+                            onDetailClick = { name, age ->
+                                navController.navigate(DetailScreen(name = name, age = age))
                             }
                         )
                     }
-                    composable<Detail> {
-                        val args = it.toRoute<Detail>()
+                    composable<DetailScreen> {
+                        val args = it.toRoute<DetailScreen>()
                         DetailScreen(
                             name = args.name,
                             age = args.age,
-                            onBack = { navController.popBackStack(route = Home, inclusive = true) }
+                            onBackClick = {
+                                navController.popBackStack(
+                                    route = HomeScreen,
+                                    inclusive = true
+                                )
+                            }
                         )
-                        /*Column(
-                            modifier = Modifier.fillMaxSize(),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                        ) {
-                            Text(text = "${args.name}, ${args.age} years old")
-                        }*/
                     }
                 }
             }

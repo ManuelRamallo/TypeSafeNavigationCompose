@@ -39,7 +39,7 @@ import com.mramallo.typesafenavigationcompose.ui.theme.Typography
 
 @Composable
 fun HomeScreen(
-    onDetailClick: () -> Unit
+    onDetailClick: (String, Int) -> Unit
 ) {
 
     Box(
@@ -92,7 +92,7 @@ fun HomeScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = { onDetailClick.invoke("Manuel Ramallo", 28) },
                     modifier = Modifier
                         .size(100.dp)
                         .clip(CircleShape),
@@ -114,7 +114,5 @@ fun HomeScreen(
 @Preview
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen {
-
-    }
+    HomeScreen { name, age -> }
 }
