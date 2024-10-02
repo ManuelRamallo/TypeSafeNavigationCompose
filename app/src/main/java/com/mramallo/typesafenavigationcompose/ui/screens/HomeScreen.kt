@@ -1,8 +1,11 @@
 package com.mramallo.typesafenavigationcompose.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -39,7 +42,8 @@ import com.mramallo.typesafenavigationcompose.ui.theme.Typography
 
 @Composable
 fun HomeScreen(
-    onDetailClick: (String, Int) -> Unit
+    onDetailClick: (String, Int) -> Unit,
+    onListClick: () -> Unit
 ) {
 
     Box(
@@ -78,7 +82,7 @@ fun HomeScreen(
                 style = Typography.titleLarge,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(0.6f),
+                    .weight(0.4f),
                 textAlign = TextAlign.Center,
                 lineHeight = 1.5.em
             )
@@ -88,7 +92,7 @@ fun HomeScreen(
                 contentDescription = "ic_security",
             )
             Box(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.weight(.4f),
                 contentAlignment = Alignment.Center
             ) {
                 Button(
@@ -107,6 +111,26 @@ fun HomeScreen(
                     )
                 }
             }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Text(
+                    text = "Go to List",
+                    color = Color.White,
+                    style = Typography.bodyLarge,
+                    modifier = Modifier
+                        .clickable {
+                            onListClick.invoke()
+                        }
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Color(0xFFFFFF).copy(0.2f))
+                        .padding(12.dp),
+                    textAlign = TextAlign.Center,
+                    lineHeight = 1.5.em
+                )
+            }
+
         }
     }
 }
@@ -114,5 +138,8 @@ fun HomeScreen(
 @Preview
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen { name, age -> }
+    HomeScreen(
+        onDetailClick = { name, age -> /* TODO */ },
+        onListClick = { /* TODO */ }
+    )
 }
