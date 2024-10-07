@@ -17,7 +17,7 @@ object CustomNavType {
         }
 
         override fun parseValue(value: String): Dog {
-            return Json.decodeFromString(Uri.encode(value))
+            return Json.decodeFromString(Uri.decode(value))
         }
 
         override fun serializeAsValue(value: Dog): String {
