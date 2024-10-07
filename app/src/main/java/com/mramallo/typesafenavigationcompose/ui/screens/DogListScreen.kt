@@ -51,27 +51,38 @@ fun DogListScreen(
             .padding(vertical = 40.dp)
     ) {
         item {
-            IconButton(
-                onClick = { onBackClick() },
-                modifier = Modifier
-                    .padding(20.dp)
-                    .size(60.dp),
-                colors = IconButtonDefaults.iconButtonColors(
-                    containerColor = Color(0xFFB384EB)
-                )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    AsyncImage(
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(R.drawable.left_arrow_svgrepo_com).build(),
-                        colorFilter = ColorFilter.tint(Color.White),
-                        contentDescription = "left_arrow",
-                        modifier = Modifier.size(24.dp)
+                IconButton(
+                    onClick = { onBackClick() },
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .size(60.dp),
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = Color(0xFFB384EB)
                     )
+                ) {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data(R.drawable.left_arrow_svgrepo_com).build(),
+                            colorFilter = ColorFilter.tint(Color.White),
+                            contentDescription = "left_arrow",
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
                 }
+                Text(
+                    text = "Dogs List",
+                    color = Color.White,
+                    style = Typography.headlineLarge,
+                    modifier = Modifier.padding(16.dp)
+                )
             }
         }
         items(SAMPLE_DATA_DOGS.keys.toList()) { dog ->
@@ -82,7 +93,7 @@ fun DogListScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = dog.toString(),
+                        text = dog.name,
                         color = Color.White,
                         style = Typography.bodyMedium,
                         modifier = Modifier

@@ -80,7 +80,7 @@ class MainActivity : ComponentActivity() {
                             dog = args.dog,
                             breedSize = args.breedSize,
                             onBackClick = {
-                                navController.popBackStack(route = HomeRoute, inclusive = false)
+                                navController.popBackStack(route = DogListRoute, inclusive = false)
                             }
                         )
                     }
