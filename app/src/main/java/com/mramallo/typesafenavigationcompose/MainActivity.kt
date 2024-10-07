@@ -12,10 +12,12 @@ import androidx.navigation.toRoute
 import com.mramallo.typesafenavigationcompose.domain.entity.BreedSize
 import com.mramallo.typesafenavigationcompose.domain.entity.Dog
 import com.mramallo.typesafenavigationcompose.ui.navigation.CustomNavType
+import com.mramallo.typesafenavigationcompose.ui.navigation.DeepLinkRoute
 import com.mramallo.typesafenavigationcompose.ui.navigation.DetailRoute
 import com.mramallo.typesafenavigationcompose.ui.navigation.DogDetailRoute
 import com.mramallo.typesafenavigationcompose.ui.navigation.DogListRoute
 import com.mramallo.typesafenavigationcompose.ui.navigation.HomeRoute
+import com.mramallo.typesafenavigationcompose.ui.screens.DeepLinkScreen
 import com.mramallo.typesafenavigationcompose.ui.screens.DetailScreen
 import com.mramallo.typesafenavigationcompose.ui.screens.DogDetailScreen
 import com.mramallo.typesafenavigationcompose.ui.screens.DogListScreen
@@ -41,6 +43,9 @@ class MainActivity : ComponentActivity() {
                             },
                             onListClick = {
                                 navController.navigate(DogListRoute)
+                            },
+                            onDeepLinkClick = {
+                                navController.navigate(DeepLinkRoute(id = 0))
                             }
                         )
                     }
@@ -53,6 +58,10 @@ class MainActivity : ComponentActivity() {
                                 navController.popBackStack(route = HomeRoute, inclusive = false)
                             }
                         )
+                    }
+                    composable<DeepLinkRoute> {
+                        val args = it.toRoute<DeepLinkRoute>()
+                        DeepLinkScreen()
                     }
                     composable<DogListRoute> {
                         DogListScreen(

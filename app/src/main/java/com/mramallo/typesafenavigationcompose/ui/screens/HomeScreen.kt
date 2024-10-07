@@ -43,7 +43,8 @@ import com.mramallo.typesafenavigationcompose.ui.theme.Typography
 @Composable
 fun HomeScreen(
     onDetailClick: (String, Int) -> Unit,
-    onListClick: () -> Unit
+    onListClick: () -> Unit,
+    onDeepLinkClick: () -> Unit
 ) {
 
     Box(
@@ -113,8 +114,23 @@ fun HomeScreen(
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
+                Text(
+                    text = "Go to DeepLink",
+                    color = Color.White,
+                    style = Typography.bodyLarge,
+                    modifier = Modifier
+                        .clickable {
+                            onDeepLinkClick.invoke()
+                        }
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Color(0xFFFFFF).copy(0.2f))
+                        .padding(12.dp),
+                    textAlign = TextAlign.Center,
+                    lineHeight = 1.5.em
+                )
+
                 Text(
                     text = "Go to List",
                     color = Color.White,
@@ -140,6 +156,7 @@ fun HomeScreen(
 fun HomeScreenPreview() {
     HomeScreen(
         onDetailClick = { name, age -> /* TODO */ },
-        onListClick = { /* TODO */ }
+        onListClick = { /* TODO */ },
+        onDeepLinkClick = { /* TODO */ }
     )
 }

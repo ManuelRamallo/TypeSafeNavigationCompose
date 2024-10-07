@@ -11,6 +11,9 @@ object HomeRoute
 data class DetailRoute(val name: String, val age: Int?)
 
 @Serializable
+data class DeepLinkRoute(val id: Int)
+
+@Serializable
 object DogListRoute
 
 @Serializable
